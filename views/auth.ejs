@@ -1,0 +1,99 @@
+    <head>
+        <title><%=name%></title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel ="stylesheet" type="text/css" href = "mystyle.css">
+    </head>
+    
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand" href="#">WorkEasy</a>
+                
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                        <% if (islogin){%>
+                        <li class="nav-item">
+                        <a class="nav-link" href="/logout">Logout</a>
+                        </li>
+                        <li class="nav-item">
+                                <a class="nav-link" href="/profile">Profile</a>
+                        </li>
+                        <%} else {%>
+                            <li class="nav-item">
+                            <a class="nav-link" href="/login">Login</a>
+                            </li>
+                            <li class="nav-item">
+                            <a class="nav-link" href="/register">Sign Up
+                            </a></li>
+                        <%}%>
+                    </li>
+                    </ul>
+                </div>
+                </nav>
+        <h1 class = "display-3"><h1>Hello <%= name %>!</h1>
+        <h2>You will be able to access your information here</h2>
+        <p class='text-center'>Create or join a group here! <span><a href="/create"> Create or Join</a></span></p>
+        <p class='text-center'>Create a chore here! <span><a href="/chore"> Create Chore</a></span></p>
+        <div class="container">
+                <h4 class='list-heading'>Here are your groups:</h4>
+        <div class="row justify-content-left" style='margin-left: 20%'>
+        
+        <ul class = 'list-group'>
+        <%for (var i = 0; i < data.length; i++){%>
+            
+               <li class = 'list-item'>
+                   <a href="/profile/<%=data[i].groupname%>"> <%=data[i].groupname%></a>
+               </li> 
+                <%}%>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+            <h4 class='list-heading'>Today's chores:</h4>
+    <div class="row justify-content-left" style='margin-left: 20%'>
+    <%var d = new Date();
+    var weekday = new Array(7);
+    weekday[0] =  "sunday";
+    weekday[1] = "monday";
+    weekday[2] = "tuesday";
+    weekday[3] = "wednesday";
+    weekday[4] = "thursday";
+    weekday[5] = "friday";
+    weekday[6] = "saturday";
+    var n = weekday[d.getDay()];%>
+    <ul class = 'list-group'>
+    <%for (var i = 0; i < chdata.length; i++){%>
+        
+          
+               <% if(chdata[i][n]){%>
+                <li class = 'list-item'> 
+                    Today: <%=chdata[i].chore%> 
+                </li> 
+            <%}}%>
+        </ul>
+    </div>
+</div>
+
+<div class="container">
+        <h4 class='list-heading'>All chores:</h4>
+<div class="row justify-content-left" style='margin-left: 20%'>
+<ul class = 'list-group'>
+<%for (var i = 0; i < chdata.length; i++){%>
+            <%for (var j = 0; j < 7; j++){
+            if(chdata[i][weekday[j]]){%>
+                <li class = 'list-item'>
+                 <%=weekday[j] + ": " + chdata[i].chore %> 
+                </li>
+        
+        <%}}}%>
+    </ul>
+</div>
+</div>
+    </body>
+    </html>

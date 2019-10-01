@@ -1,0 +1,107 @@
+<head>
+        <title>
+            <%=name%>
+        </title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel ="stylesheet" type="text/css" href = "mystyle.css">
+    </head>
+    
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand" href="#">WorkEasy</a>
+                
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                        <% if (islogin){%>
+                        <li class="nav-item">
+                        <a class="nav-link" href="/logout">Logout</a>
+                        </li>
+                        <li class="nav-item">
+                                <a class="nav-link" href="/profile">Profile</a>
+                        </li>
+                        <%} else {%>
+                            <li class="nav-item">
+                            <a class="nav-link" href="/login">Login</a>
+                            </li>
+                            <li class="nav-item">
+                            <a class="nav-link" href="/register">Sign Up
+                            </a></li>
+                        <%}%>
+                    </li>
+                    </ul>
+                </div>
+                </nav>
+        <h1 class = "display-3"><h1>Hello <%= name %> and welcome to <%=chre%> homepage!</h1>
+        <h2>You will be able to access and edit the chore information here</h2>
+
+    <div class="container">
+            <div class="row" style= "width: 40%; margin: 50px auto">
+                    <label>What day would you like to sign up for?</label>
+        <form action='/profile/<%=grp%>/<%=chre%>' method='POST'>
+            <div class="form-group" style="width: 100%" >
+                    <label for="sel1">Chore Group:</label>
+                    <select class="form-control" name="choseday">
+
+                        <option>
+                                Sunday
+                                <% if(data[0].sunday) {%>
+                                    (Taken by: 
+                                    <%=data[0].sunday+ ')'%>
+                                    <%}%>
+                        </option> 
+                        <option>
+                                Monday
+                                <% if(data[0].monday) {%>
+                                    (Taken by: 
+                                    <%=data[0].tuesday+ ')'%>
+                                    <%}%>
+                        </option> 
+                        <option>
+                                Tuesday
+                                <% if(data[0].tuesday) {%>
+                                    (Taken by: 
+                                    <%=data[0].tuesday + ')'%>
+                                    <%}%>
+                        </option> 
+                        <option>
+                                Wednesday
+                                <% if(data[0].wednesday) {%>
+                                    (Taken by: 
+                                    <%=data[0].wednesday + ')'%>
+                                    <%}%>
+                        </option> 
+                        <option>
+                                Thursday
+                                <% if(data[0].thursday) {%>
+                                    (Taken by: 
+                                    <%=data[0].thursday + ')'%>
+                                    <%}%>
+                        </option> 
+                        <option>
+                                Friday
+                                <% if(data[0].friday) {%>
+                                    (Taken by: 
+                                    <%=data[0].friday + ')'%>
+                                    <%}%>
+                        </option> 
+                        <option>
+                                Saturday
+                                <% if(data[0].saturday) {%>
+                                    (Taken by: 
+                                    <%=data[0].saturday + ')'%>
+                                    <%}%>
+                        </option> 
+                          
+                    </select>
+                    <button type="submit" class="btn btn-primary btn-block" style= 'margin-bottom: 5px;'>Confirm</button>
+        </form>
+        </div>
+        </div>
+    </body>
+    </html>
